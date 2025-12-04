@@ -131,104 +131,114 @@ export default function ProfilePage({ params }: ProfilePageProps) {
                         </div>
                     </div>
                 </div>
+            </div>
 
-                {/* XP & Level Progress */}
-                <div className="xp-progress-section mb-8 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm">
-                    <div className="flex justify-between items-center mb-2">
-                        <div>
-                            <span className="text-sm text-gray-500 dark:text-gray-400">Mevcut Seviye</span>
-                            <h3 className="text-xl font-bold text-indigo-600 dark:text-indigo-400">{currentBadge.name}</h3>
-                        </div>
-                        <div className="text-right">
-                            <span className="text-sm text-gray-500 dark:text-gray-400">Toplam XP</span>
-                            <h3 className="text-xl font-bold">{userXP} XP</h3>
-                        </div>
-                    </div>
-
-                    <div className="relative w-full h-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                        <div
-                            className="absolute top-0 left-0 h-full bg-gradient-to-r from-indigo-500 to-purple-600 transition-all duration-1000 ease-out"
-                            style={{ width: `${nextBadgeInfo.progress}%` }}
-                        ></div>
-                    </div>
-
-                    {nextBadgeInfo.nextBadge ? (
-                        <p className="text-sm text-center mt-2 text-gray-500">
-                            Sonraki seviye <strong>{nextBadgeInfo.nextBadge.name}</strong> için
-                            <span className="font-bold text-indigo-500"> {nextBadgeInfo.remainingXP} XP</span> daha kazanmalısın.
-                        </p>
-                    ) : (
-                        <p className="text-sm text-center mt-2 text-yellow-500 font-bold">
-                            🏆 Zirvedesin! Efsanevi bir yazarsın.
-                        </p>
-                    )}
+            {/* Bio Section */}
+            {userProfile.bio && (
+                <div className="profile-bio mb-8 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Hakkımda</h3>
+                    <p className="text-gray-600 dark:text-gray-300 whitespace-pre-wrap">
+                        {userProfile.bio}
+                    </p>
                 </div>
+            )}
 
-                {/* Stats */}
-                <div className="profile-stats">
-                    <div className="stat-card">
-                        <span className="stat-icon">📚</span>
-                        <span className="stat-value">{stats.storiesCount}</span>
-                        <span className="stat-label">Hikaye</span>
+            {/* XP & Level Progress */}
+            <div className="xp-progress-section mb-8 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm">
+                <div className="flex justify-between items-center mb-2">
+                    <div>
+                        <span className="text-sm text-gray-500 dark:text-gray-400">Mevcut Seviye</span>
+                        <h3 className="text-xl font-bold text-indigo-600 dark:text-indigo-400">{currentBadge.name}</h3>
                     </div>
-                    <div className="stat-card">
-                        <span className="stat-icon">💬</span>
-                        <span className="stat-value">{stats.commentsCount}</span>
-                        <span className="stat-label">Yorum</span>
-                    </div>
-                    <div className="stat-card">
-                        <span className="stat-icon">👁️</span>
-                        <span className="stat-value">{stats.totalViews}</span>
-                        <span className="stat-label">Görüntülenme</span>
-                    </div>
-                    <div className="stat-card">
-                        <span className="stat-icon">❤️</span>
-                        <span className="stat-value">{stats.totalLikes}</span>
-                        <span className="stat-label">Beğeni</span>
+                    <div className="text-right">
+                        <span className="text-sm text-gray-500 dark:text-gray-400">Toplam XP</span>
+                        <h3 className="text-xl font-bold">{userXP} XP</h3>
                     </div>
                 </div>
 
-                {/* Badge Showcase */}
-                <div className="badge-showcase">
-                    <h2 className="section-title">🏆 Rozet Koleksiyonu</h2>
-                    <div className="badges-grid">
-                        {badges.map((badge) => {
-                            const isUnlocked = userXP >= badge.requiredXP;
-                            return (
-                                <div
-                                    key={badge.id}
-                                    className={`badge-item ${isUnlocked ? 'unlocked' : 'locked'}`}
-                                    title={`${badge.name} - ${badge.description}`}
-                                >
-                                    <span className="badge-emoji">{badge.emoji}</span>
-                                    <span className="badge-name">{badge.name}</span>
-                                    {!isUnlocked && (
-                                        <span className="badge-lock">🔒</span>
-                                    )}
-                                </div>
-                            );
-                        })}
-                    </div>
+                <div className="relative w-full h-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                    <div
+                        className="absolute top-0 left-0 h-full bg-gradient-to-r from-indigo-500 to-purple-600 transition-all duration-1000 ease-out"
+                        style={{ width: `${nextBadgeInfo.progress}%` }}
+                    ></div>
                 </div>
 
-                {/* User Stories */}
-                <div className="user-stories-section">
-                    <h2 className="section-title">
-                        📚 {isOwnProfile ? 'Hikayelerim' : 'Hikayeleri'}
-                    </h2>
-                    {userStories.length === 0 ? (
-                        <div className="empty-state">
-                            <span className="empty-icon">📝</span>
-                            <p>Henüz hikaye yazılmamış.</p>
-                        </div>
-                    ) : (
-                        <div className="stories-grid">
-                            {userStories.map((story) => (
-                                <StoryCard key={story.id} story={story} />
-                            ))}
-                        </div>
-                    )}
+                {nextBadgeInfo.nextBadge ? (
+                    <p className="text-sm text-center mt-2 text-gray-500">
+                        Sonraki seviye <strong>{nextBadgeInfo.nextBadge.name}</strong> için
+                        <span className="font-bold text-indigo-500"> {nextBadgeInfo.remainingXP} XP</span> daha kazanmalısın.
+                    </p>
+                ) : (
+                    <p className="text-sm text-center mt-2 text-yellow-500 font-bold">
+                        🏆 Zirvedesin! Efsanevi bir yazarsın.
+                    </p>
+                )}
+            </div>
+
+            {/* Stats */}
+            <div className="profile-stats">
+                <div className="stat-card">
+                    <span className="stat-icon">📚</span>
+                    <span className="stat-value">{stats.storiesCount}</span>
+                    <span className="stat-label">Hikaye</span>
                 </div>
+                <div className="stat-card">
+                    <span className="stat-icon">💬</span>
+                    <span className="stat-value">{stats.commentsCount}</span>
+                    <span className="stat-label">Yorum</span>
+                </div>
+                <div className="stat-card">
+                    <span className="stat-icon">👁️</span>
+                    <span className="stat-value">{stats.totalViews}</span>
+                    <span className="stat-label">Görüntülenme</span>
+                </div>
+                <div className="stat-card">
+                    <span className="stat-icon">❤️</span>
+                    <span className="stat-value">{stats.totalLikes}</span>
+                    <span className="stat-label">Beğeni</span>
+                </div>
+            </div>
+
+            {/* Badge Showcase */}
+            <div className="badge-showcase">
+                <h2 className="section-title">🏆 Rozet Koleksiyonu</h2>
+                <div className="badges-grid">
+                    {badges.map((badge) => {
+                        const isUnlocked = userXP >= badge.requiredXP;
+                        return (
+                            <div
+                                key={badge.id}
+                                className={`badge-item ${isUnlocked ? 'unlocked' : 'locked'}`}
+                                title={`${badge.name} - ${badge.description}`}
+                            >
+                                <span className="badge-emoji">{badge.emoji}</span>
+                                <span className="badge-name">{badge.name}</span>
+                                {!isUnlocked && (
+                                    <span className="badge-lock">🔒</span>
+                                )}
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+
+            {/* User Stories */}
+            <div className="user-stories-section">
+                <h2 className="section-title">
+                    📚 {isOwnProfile ? 'Hikayelerim' : 'Hikayeleri'}
+                </h2>
+                {userStories.length === 0 ? (
+                    <div className="empty-state">
+                        <span className="empty-icon">📝</span>
+                        <p>Henüz hikaye yazılmamış.</p>
+                    </div>
+                ) : (
+                    <div className="stories-grid">
+                        {userStories.map((story) => (
+                            <StoryCard key={story.id} story={story} />
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     );

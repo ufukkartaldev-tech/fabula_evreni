@@ -13,4 +13,5 @@ export interface UserProfile {
     lastUpdated?: Date | Timestamp;
     followerCount?: number;
     followingCount?: number;
+    bio?: string;
 }

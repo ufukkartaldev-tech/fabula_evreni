@@ -81,12 +81,12 @@ export default function UserMenu() {
 
                     <div className="user-menu-divider"></div>
 
-                    <Link href="/profile" className="user-menu-item" onClick={() => setIsOpen(false)}>
+                    <Link href={`/profile/${user.uid}`} className="user-menu-item" onClick={() => setIsOpen(false)}>
                         <span>👤</span>
                         Profilim
                     </Link>
 
-                    <Link href="/my-stories" className="user-menu-item" onClick={() => setIsOpen(false)}>
+                    <Link href={`/profile/${user.uid}`} className="user-menu-item" onClick={() => setIsOpen(false)}>
                         <span>📚</span>
                         Hikayelerim
                     </Link>

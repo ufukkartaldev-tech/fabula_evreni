@@ -54,27 +54,14 @@ export async function GET(request: Request) {
                         id: "node_cockpit",
                         title: "Kokpit",
                         content: "Koridor boyunca süzülerek kokpite ulaştı. Kontrol paneli kıvılcımlar saçıyordu. Dışarıdaki pencereden Dünya'nın mavi parıltısı yerine, kapkara bir boşluk görünüyordu. Navigasyon sistemi bozulmuştu.",
-                        choices: [
-                            {
-                                id: "c3",
-                                text: "Manuel kontrolü devreye alıp rotayı hesaplamaya çalıştı.",
-                                nextNodeId: "node_manual",
-                                votes: 0
-                            },
-                            {
-                                id: "c4",
-                                text: "Telsizden yardım çağrısı gönderdi.",
-                                nextNodeId: "node_radio",
-                                votes: 0
-                            }
-                        ],
+                        choices: [], // Kullanıcılar buradan devam edecek
                         authorId: "system"
                     },
                     "node_medbay": {
                         id: "node_medbay",
                         title: "Revir",
                         content: "Revire girdiğinde ortalık darmadağınıktı. İlaçlar havada uçuşuyordu. Aynaya baktığında alnındaki derin yarayı gördü. Bu bir kaza değildi, birisi ona saldırmıştı.",
-                        choices: [], // Henüz yazılmamış
+                        choices: [], // Kullanıcılar buradan devam edecek
                         authorId: "system"
                     }
                 }
@@ -120,7 +107,14 @@ export async function GET(request: Request) {
                         id: "node_salon",
                         title: "Salon",
                         content: "Salona girdiğinde şöminede hala sönmemiş bir ateş buldu. Birisi buradaydı. Ya da çok yakın bir zamanda buradaydı. Koltuğun üzerinde eski bir günlük duruyordu.",
-                        choices: [],
+                        choices: [], // Kullanıcılar buradan devam edecek
+                        authorId: "system"
+                    },
+                    "node_upstairs": {
+                        id: "node_upstairs",
+                        title: "Üst Kat",
+                        content: "Merdivenler her adımda gıcırdıyordu. Üst kata çıktığında uzun bir koridorla karşılaştı. Koridorun sonundaki odadan garip bir müzik sesi geliyordu.",
+                        choices: [], // Kullanıcılar buradan devam edecek
                         authorId: "system"
                     }
                 }

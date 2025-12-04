@@ -1,0 +1,3 @@
+{
+  "/api/admin/set-custom-claims/route": "app/api/admin/set-custom-claims/route.js"
+}

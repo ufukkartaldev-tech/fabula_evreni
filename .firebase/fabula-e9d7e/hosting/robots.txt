@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://fabula.app/sitemap.xml
+
+# Disallow admin or private routes (if any)
+Disallow: /api/

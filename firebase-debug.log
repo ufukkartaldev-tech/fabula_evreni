@@ -1,0 +1,187 @@
+[debug] [2025-12-04T16:43:01.730Z] ----------------------------------------------------------------------
+[debug] [2025-12-04T16:43:01.736Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\90538\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-12-04T16:43:01.737Z] CLI Version:   14.22.0
+[debug] [2025-12-04T16:43:01.737Z] Platform:      win32
+[debug] [2025-12-04T16:43:01.737Z] Node Version:  v24.11.0
+[debug] [2025-12-04T16:43:01.738Z] Time:          Thu Dec 04 2025 19:43:01 GMT+0300 (GMT+03:00)
+[debug] [2025-12-04T16:43:01.738Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-12-04T16:43:02.108Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-12-04T16:43:02.109Z] > authorizing via signed-in user (ufukkartal2929@gmail.com)
+[debug] [2025-12-04T16:43:02.109Z] [iam] checking project fabula-e9d7e for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
+[debug] [2025-12-04T16:43:02.111Z] Checked if tokens are valid: true, expires at: 1764870140980
+[debug] [2025-12-04T16:43:02.111Z] Checked if tokens are valid: true, expires at: 1764870140980
+[debug] [2025-12-04T16:43:02.113Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/fabula-e9d7e:testIamPermissions [none]
+[debug] [2025-12-04T16:43:02.113Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/fabula-e9d7e:testIamPermissions x-goog-quota-user=projects/fabula-e9d7e
+[debug] [2025-12-04T16:43:02.113Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/fabula-e9d7e:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]}
+[debug] [2025-12-04T16:43:03.210Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/fabula-e9d7e:testIamPermissions 200
+[debug] [2025-12-04T16:43:03.210Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/fabula-e9d7e:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]}
+[debug] [2025-12-04T16:43:03.211Z] Checked if tokens are valid: true, expires at: 1764870140980
+[debug] [2025-12-04T16:43:03.211Z] Checked if tokens are valid: true, expires at: 1764870140980
+[debug] [2025-12-04T16:43:03.211Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/fabula-e9d7e [none]
+[debug] [2025-12-04T16:43:03.684Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/fabula-e9d7e 200
+[debug] [2025-12-04T16:43:03.684Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/fabula-e9d7e {"projectId":"fabula-e9d7e","projectNumber":"296753282882","displayName":"fabula","name":"projects/fabula-e9d7e","resources":{"hostingSite":"fabula-e9d7e"},"state":"ACTIVE","etag":"1_03dd553d-c0bf-4f36-866a-6357a1d694d4"}
+[debug] [2025-12-04T16:43:11.621Z] defaultcredentials: writing to file C:\Users\90538\AppData\Roaming\firebase\ufukkartal2929_gmail_com_application_default_credentials.json
+[debug] [2025-12-04T16:43:11.632Z] Checked if tokens are valid: true, expires at: 1764870140980
+[debug] [2025-12-04T16:43:11.634Z] Checked if tokens are valid: true, expires at: 1764870140980
+[debug] [2025-12-04T16:43:11.635Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/fabula-e9d7e/sites pageToken=&pageSize=10
+[debug] [2025-12-04T16:43:12.982Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/fabula-e9d7e/sites 200
+[debug] [2025-12-04T16:43:12.983Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/fabula-e9d7e/sites {"sites":[{"name":"projects/fabula-e9d7e/sites/fabula-e9d7e","defaultUrl":"https://fabula-e9d7e.web.app","appId":"1:296753282882:web:a824ee7c48d116cc3892db","type":"DEFAULT_SITE"}]}
+[debug] [2025-12-04T16:43:12.983Z] Checked if tokens are valid: true, expires at: 1764870140980
+[debug] [2025-12-04T16:43:12.983Z] Checked if tokens are valid: true, expires at: 1764870140980
+[debug] [2025-12-04T16:43:12.984Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:296753282882:web:a824ee7c48d116cc3892db/config [none]
+[debug] [2025-12-04T16:43:13.904Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:296753282882:web:a824ee7c48d116cc3892db/config 200
+[debug] [2025-12-04T16:43:13.904Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:296753282882:web:a824ee7c48d116cc3892db/config {"projectId":"fabula-e9d7e","appId":"1:296753282882:web:a824ee7c48d116cc3892db","storageBucket":"fabula-e9d7e.firebasestorage.app","apiKey":"AIzaSyC_2kv4plQXsi_eftZcihhywv6msdZhdM4","authDomain":"fabula-e9d7e.firebaseapp.com","messagingSenderId":"296753282882","measurementId":"G-MGW3LP57MJ","projectNumber":"296753282882","version":"2"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+   The integration is known to work with Next.js version 12 - 15.0. You may encounter errors.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2025-12-04T16:43:28.406Z] Checked if tokens are valid: true, expires at: 1764870140980
+[debug] [2025-12-04T16:43:28.406Z] Checked if tokens are valid: true, expires at: 1764870140980
+[debug] [2025-12-04T16:43:28.406Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/fabula-e9d7e/sites/fabula-e9d7e [none]
+[debug] [2025-12-04T16:43:29.512Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/fabula-e9d7e/sites/fabula-e9d7e 200
+[debug] [2025-12-04T16:43:29.513Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/fabula-e9d7e/sites/fabula-e9d7e {"name":"projects/fabula-e9d7e/sites/fabula-e9d7e","defaultUrl":"https://fabula-e9d7e.web.app","appId":"1:296753282882:web:a824ee7c48d116cc3892db","type":"DEFAULT_SITE"}
+[info] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[info]    ▲ Next.js 16.0.3 (Turbopack)
+
+[info] 
+
+[info]    Creating an optimized production build ...
+
+[info] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[info] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[info]  ✓ Compiled successfully in 20.0s
+
+[info]    Running TypeScript ...
+
+[info]    Collecting page data using 11 workers ...
+
+[info] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[info] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[info] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[info] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[info] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[info] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[info] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[info] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[info] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[info] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[info] Firebase Admin initialized with application default credentials
+
+[info] Firebase Admin initialized with application default credentials
+Firebase Admin initialized with application default credentials
+
+[info] Firebase Admin initialized with application default credentials
+Firebase Admin initialized with application default credentials
+
+[info] Firebase Admin initialized with application default credentials
+
+[info] Firebase Admin initialized with application default credentials
+
+[info] Firebase Admin initialized with application default credentials
+
+[info] Firebase Admin initialized with application default credentials
+Firebase Admin initialized with application default credentials
+
+[info] Firebase Admin initialized with application default credentials
+
+[info]    Generating static pages using 11 workers (0/22) ...
+
+[info] [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[info] Firebase Admin initialized with application default credentials
+
+[info]    Generating static pages using 11 workers (5/22) 
+
+[info]    Generating static pages using 11 workers (10/22) 
+
+[info]    Generating static pages using 11 workers (16/22) 
+
+[info] ⚠️ getStories() is deprecated. Use getStoriesPaginated() for better performance.
+
+[info]  ✓ Generating static pages using 11 workers (22/22) in 3.7s
+
+[info]    Finalizing page optimization ...
+
+[info] 
+
+[info] Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /admin
+├ ○ /admin/reports
+├ ○ /admin/stories
+├ ƒ /api/admin/reports
+├ ƒ /api/admin/reports/[id]
+├ ƒ /api/admin/set-custom-claims
+├ ƒ /api/admin/stories
+├ ƒ /api/admin/stories/[id]
+├ ƒ /api/collections
+├ ƒ /api/collections/[id]
+├ ƒ /api/complete-story
+├ ƒ /api/create-story
+├ ƒ /api/get-top-stories
+├ ƒ /api/report
+├ ƒ /api/stories/[id]/propose
+├ ○ /collections
+├ ƒ /collections/[id]
+├ ○ /create
+├ ○ /drafts
+├ ○ /favorites
+├ ○ /leaderboard
+├ ƒ /profile/[uid]
+├ ○ /setup-admin
+├ ○ /sitemap.xml
+└ ƒ /story/[id]
+
+
+
+[info] ○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+
+[info] Building a Cloud Function to run this application. This is needed due to:
+[info]  • non-static component /api/admin/reports/[id]/route
+[info]  • non-static component /api/admin/reports/route
+[info]  • non-static component /api/admin/set-custom-claims/route
+[info]  • non-static component /api/admin/stories/[id]/route
+[info]  • non-static component /api/admin/stories/route
+[debug] [2025-12-04T16:44:21.443Z]  • non-static component /api/collections/[id]/route
+[debug] [2025-12-04T16:44:21.444Z]  • non-static component /api/collections/route
+[debug] [2025-12-04T16:44:21.444Z]  • non-static component /api/complete-story/route
+[debug] [2025-12-04T16:44:21.444Z]  • non-static component /api/create-story/route
+[debug] [2025-12-04T16:44:21.444Z]  • non-static component /api/get-top-stories/route
+[debug] [2025-12-04T16:44:21.444Z]  • non-static component /api/report/route
+[debug] [2025-12-04T16:44:21.444Z]  • non-static component /api/stories/[id]/propose/route
+[debug] [2025-12-04T16:44:21.444Z]  • non-static component /collections/[id]/page
+[debug] [2025-12-04T16:44:21.444Z]  • non-static component /profile/[uid]/page
+[debug] [2025-12-04T16:44:21.444Z]  • non-static component /story/[id]/page
+[info]  • and 10 other reasons, use --debug to see more
+[info] 
+[debug] [2025-12-04T16:44:21.745Z] Checked if tokens are valid: true, expires at: 1764870140980
+[debug] [2025-12-04T16:44:21.745Z] Checked if tokens are valid: true, expires at: 1764870140980
+[debug] [2025-12-04T16:44:21.746Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/fabula-e9d7e/sites/fabula-e9d7e [none]
+[debug] [2025-12-04T16:44:22.836Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/fabula-e9d7e/sites/fabula-e9d7e 200
+[debug] [2025-12-04T16:44:22.837Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/fabula-e9d7e/sites/fabula-e9d7e {"name":"projects/fabula-e9d7e/sites/fabula-e9d7e","defaultUrl":"https://fabula-e9d7e.web.app","appId":"1:296753282882:web:a824ee7c48d116cc3892db","type":"DEFAULT_SITE"}
+[warn] !  This integration expects Node version 16, 18, or 20. You're running version 24, problems may be encountered. 

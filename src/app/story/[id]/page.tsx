@@ -304,7 +304,13 @@ export default function StoryPage({ params }: StoryPageProps) {
 
                         <div className="author-section">
                             <div className="author-info">
-                                <span className="author-avatar">{story.author.avatar}</span>
+                                <span className="author-avatar">
+                                    {story.author.avatar.startsWith('http') ? (
+                                        <img src={story.author.avatar} alt={story.author.name} className="w-8 h-8 rounded-full object-cover" />
+                                    ) : (
+                                        story.author.avatar
+                                    )}
+                                </span>
                                 <span className="author-name">{story.author.name}</span>
                             </div>
 

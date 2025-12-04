@@ -68,7 +68,8 @@ export default function InteractiveStoryPlayer({ story, readingSettings, onProgr
         }
     };
 
-    const handleChoice = (nextNodeId: string) => {
+    const handleChoice = async (nextNodeId: string, choiceId: string) => {
+        // Optimistic update for UI responsiveness
         const newHistory = [...history, currentNodeId];
         setHistory(newHistory);
         setCurrentNodeId(nextNodeId);
@@ -76,11 +77,25 @@ export default function InteractiveStoryPlayer({ story, readingSettings, onProgr
         if (onProgressUpdate) {
             onProgressUpdate([...newHistory, nextNodeId]);
         }
+
+        // Fire and forget vote (don't block navigation)
+        try {
+            await fetch(`/api/stories/${story.id}/choice-vote`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nodeId: currentNodeId, choiceId })
+            });
+        } catch (error) {
+            console.error('Error voting for choice:', error);
+        }
     };
 
     if (!currentNode) {
         return <div className="p-4 text-center">Yükleniyor...</div>;
     }
+
+    // Calculate total votes for percentage
+    const totalVotes = currentNode.choices?.reduce((acc, choice) => acc + (choice.votes || 0), 0) || 0;
 
     // Styles based on reading settings
     const containerStyle = {
@@ -124,7 +139,9 @@ export default function InteractiveStoryPlayer({ story, readingSettings, onProgr
         boxShadow: readingSettings.theme === 'dark'
             ? '5px 5px 10px #2d3542, -5px -5px 10px #414d5f'
             : '9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5)',
-        marginBottom: '16px'
+        marginBottom: '16px',
+        position: 'relative' as const,
+        overflow: 'hidden'
     };
 
     return (
@@ -140,40 +157,58 @@ export default function InteractiveStoryPlayer({ story, readingSettings, onProgr
             <div className="choices-container" style={{ maxWidth: '600px', margin: '0 auto' }}>
                 {currentNode.choices && currentNode.choices.length > 0 ? (
                     <div className="choices-list">
-                        {currentNode.choices.map((choice) => (
-                            <button
-                                key={choice.id}
-                                onClick={() => handleChoice(choice.nextNodeId)}
-                                className="choice-button"
-                                style={buttonStyle}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.transform = 'translateY(-2px)';
-                                    e.currentTarget.style.boxShadow = readingSettings.theme === 'dark'
-                                        ? '6px 6px 12px #2d3542, -6px -6px 12px #414d5f'
-                                        : '12px 12px 20px rgb(163,177,198,0.7), -12px -12px 20px rgba(255,255,255, 0.6)';
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.transform = 'translateY(0)';
-                                    e.currentTarget.style.boxShadow = readingSettings.theme === 'dark'
-                                        ? '5px 5px 10px #2d3542, -5px -5px 10px #414d5f'
-                                        : '9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5)';
-                                }}
-                                onMouseDown={(e) => {
-                                    e.currentTarget.style.transform = 'translateY(1px)';
-                                    e.currentTarget.style.boxShadow = readingSettings.theme === 'dark'
-                                        ? 'inset 3px 3px 6px #2d3542, inset -3px -3px 6px #414d5f'
-                                        : 'inset 3px 3px 6px #a3b1c6, inset -3px -3px 6px #ffffff';
-                                }}
-                                onMouseUp={(e) => {
-                                    e.currentTarget.style.transform = 'translateY(-2px)';
-                                    e.currentTarget.style.boxShadow = readingSettings.theme === 'dark'
-                                        ? '6px 6px 12px #2d3542, -6px -6px 12px #414d5f'
-                                        : '12px 12px 20px rgb(163,177,198,0.7), -12px -12px 20px rgba(255,255,255, 0.6)';
-                                }}
-                            >
-                                {choice.text}
-                            </button>
-                        ))}
+                        {currentNode.choices.map((choice) => {
+                            const percentage = totalVotes > 0 ? Math.round(((choice.votes || 0) / totalVotes) * 100) : 0;
+
+                            return (
+                                <button
+                                    key={choice.id}
+                                    onClick={() => handleChoice(choice.nextNodeId, choice.id)}
+                                    className="choice-button group"
+                                    style={buttonStyle}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.transform = 'translateY(-2px)';
+                                        e.currentTarget.style.boxShadow = readingSettings.theme === 'dark'
+                                            ? '6px 6px 12px #2d3542, -6px -6px 12px #414d5f'
+                                            : '12px 12px 20px rgb(163,177,198,0.7), -12px -12px 20px rgba(255,255,255, 0.6)';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.transform = 'translateY(0)';
+                                        e.currentTarget.style.boxShadow = readingSettings.theme === 'dark'
+                                            ? '5px 5px 10px #2d3542, -5px -5px 10px #414d5f'
+                                            : '9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5)';
+                                    }}
+                                    onMouseDown={(e) => {
+                                        e.currentTarget.style.transform = 'translateY(1px)';
+                                        e.currentTarget.style.boxShadow = readingSettings.theme === 'dark'
+                                            ? 'inset 3px 3px 6px #2d3542, inset -3px -3px 6px #414d5f'
+                                            : 'inset 3px 3px 6px #a3b1c6, inset -3px -3px 6px #ffffff';
+                                    }}
+                                    onMouseUp={(e) => {
+                                        e.currentTarget.style.transform = 'translateY(-2px)';
+                                        e.currentTarget.style.boxShadow = readingSettings.theme === 'dark'
+                                            ? '6px 6px 12px #2d3542, -6px -6px 12px #414d5f'
+                                            : '12px 12px 20px rgb(163,177,198,0.7), -12px -12px 20px rgba(255,255,255, 0.6)';
+                                    }}
+                                >
+                                    <div className="flex justify-between items-center relative z-10">
+                                        <span>{choice.text}</span>
+                                        {totalVotes > 0 && (
+                                            <span className="text-xs opacity-70 font-normal bg-black/10 dark:bg-white/10 px-2 py-1 rounded-full">
+                                                %{percentage}
+                                            </span>
+                                        )}
+                                    </div>
+                                    {/* Progress bar background effect */}
+                                    {totalVotes > 0 && (
+                                        <div
+                                            className="absolute left-0 top-0 bottom-0 bg-indigo-500/10 dark:bg-indigo-400/10 transition-all duration-1000 ease-out"
+                                            style={{ width: `${percentage}%` }}
+                                        />
+                                    )}
+                                </button>
+                            );
+                        })}
                     </div>
                 ) : (
                     <div className="end-of-story text-center p-8">

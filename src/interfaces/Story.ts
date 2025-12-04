@@ -2,6 +2,7 @@ export interface StoryChoice {
   id: string;
   text: string;
   nextNodeId: string;
+  votes?: number; // Track how many times this choice was selected
 }
 
 export interface ProposedChoice {

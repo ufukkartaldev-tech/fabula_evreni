@@ -78,7 +78,13 @@ export default function StoryCard({ story }: StoryCardProps) {
 
             <div className="story-footer">
                 <div className="author-info">
-                    <span className="author-avatar">{story.author.avatar}</span>
+                    <span className="author-avatar">
+                        {story.author.avatar.startsWith('http') ? (
+                            <img src={story.author.avatar} alt={story.author.name} className="w-6 h-6 rounded-full object-cover" />
+                        ) : (
+                            story.author.avatar
+                        )}
+                    </span>
                     <span className="author-name">{story.author.name}</span>
                 </div>
 

@@ -194,12 +194,18 @@ export default function InteractiveStoryPlayer({ story, readingSettings, onProgr
                 {/* Propose Branch Button */}
                 {user && !currentNode.isEnding && (
                     <div className="mt-8 text-center">
-                        <p className="text-gray-500 mb-2 text-sm">Aklında başka bir yol mu var?</p>
+                        <p className="text-gray-500 mb-2 text-sm">
+                            {currentNode.choices && currentNode.choices.length > 0
+                                ? "Aklında başka bir yol mu var?"
+                                : "Hikaye burada bitmesin..."}
+                        </p>
                         <button
                             onClick={() => setIsProposeModalOpen(true)}
                             className="px-4 py-2 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 rounded-lg hover:bg-indigo-200 dark:hover:bg-indigo-900/50 transition-colors text-sm font-medium"
                         >
-                            ✨ Yeni Bir Yol Öner
+                            {currentNode.choices && currentNode.choices.length > 0
+                                ? "✨ Yeni Bir Yol Öner"
+                                : "✍️ Hikayeyi Devam Ettir"}
                         </button>
                     </div>
                 )}
@@ -209,6 +215,7 @@ export default function InteractiveStoryPlayer({ story, readingSettings, onProgr
                     onClose={() => setIsProposeModalOpen(false)}
                     storyId={story.id}
                     nodeId={currentNodeId}
+                    isContinuation={!currentNode.choices || currentNode.choices.length === 0}
                     onSuccess={() => {
                         // Refresh logic would be ideal here, but for now maybe just close
                         // Since we are using props, we might need to trigger a refresh in parent

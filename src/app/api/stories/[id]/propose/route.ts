@@ -9,7 +9,7 @@ export async function POST(
 ) {
     try {
         const { id } = await params;
-        const { nodeId, text, idToken } = await request.json();
+        const { nodeId, text, content, idToken } = await request.json();
 
         if (!idToken) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -36,11 +36,12 @@ export async function POST(
         const newProposedChoice = {
             id: uuidv4(),
             text,
+            content, // Store content in proposal too
             authorId: userId,
             authorName: userName,
             votes: 1, // Auto-vote for self
             voters: [userId],
-            createdAt: new Date().toISOString() // Store as string for Firestore compatibility if needed, or use Timestamp
+            createdAt: new Date().toISOString()
         };
 
         // Check threshold immediately (Threshold = 1)
@@ -50,18 +51,9 @@ export async function POST(
             // Accept immediately
             const newNextNodeId = uuidv4();
 
-            // Create the new node that this choice leads to
-            // For now, it's an empty node waiting for content? 
-            // Or maybe the proposal should include the content of the next node?
-            // Usually in interactive fiction, you propose a choice text AND the content that follows.
-            // But for simplicity, let's say the next node is empty or "To be written".
-            // Wait, if it's "To be written", then who writes it?
-            // Maybe the proposal IS the next segment?
-            // Let's assume the proposal is just the choice text for now, and the next node is a placeholder.
-
             const newNode = {
                 id: newNextNodeId,
-                content: "Bu bölüm henüz yazılmadı. Devamını yazmak için düzenleyin!",
+                content: content || "Bu bölüm henüz yazılmadı. Devamını yazmak için düzenleyin!",
                 choices: [],
                 isEnding: false
             };

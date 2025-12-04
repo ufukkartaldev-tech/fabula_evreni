@@ -101,6 +101,11 @@ export default function UserMenu() {
                         Okuma Listelerim
                     </Link>
 
+                    <Link href="/badges" className="user-menu-item" onClick={() => setIsOpen(false)}>
+                        <span>🏆</span>
+                        Rozetler & Seviyeler
+                    </Link>
+
                     <Link href="/settings" className="user-menu-item" onClick={() => setIsOpen(false)}>
                         <span>⚙️</span>
                         Ayarlar

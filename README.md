@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📚 Fabula - İnteraktif Hikaye Platformu
 
-## Getting Started
+Fabula, kullanıcıların birlikte hikayeler oluşturabildiği, okuyabildiği ve hikayelerin gidişatına yön verebildiği modern bir hikaye anlatıcılığı platformudur.
 
-First, run the development server:
+![Fabula Banner](https://via.placeholder.com/1200x400?text=Fabula+Storytelling+Platform)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🌟 Özellikler
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **✍️ İnteraktif Hikayeler:** Okuyucuların seçim yaparak gidişatı değiştirebildiği dallanan hikaye yapısı.
+- **🌳 Hızlı Dallanma:** Kullanıcılar hikayelere yeni yollar önerebilir ve anında katkıda bulunabilir.
+- **🏆 Oyunlaştırma:** Okudukça ve yazdıkça XP kazanın, seviye atlayın ve rozetler toplayın.
+- **👤 Kullanıcı Profilleri:** Okuma geçmişi, kazanılan rozetler ve istatistikler.
+- **📂 Koleksiyonlar:** Favori hikayelerinizi kişisel listelerde toplayın.
+- **🛡️ Moderasyon:** Topluluk odaklı raporlama sistemi ve gelişmiş Admin paneli.
+- **💬 Yorum ve Etkileşim:** Hikayelere yorum yapın, beğenin ve tartışmalara katılın.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Teknolojiler
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Frontend:** [Next.js 15](https://nextjs.org/) (App Router), React 19
+- **Stil:** [Tailwind CSS](https://tailwindcss.com/)
+- **Backend & Veritabanı:** [Firebase](https://firebase.google.com/) (Firestore, Auth, Storage)
+- **Deploy:** [Vercel](https://vercel.com/)
 
-## Learn More
+## 🚀 Kurulum
 
-To learn more about Next.js, take a look at the following resources:
+Projeyi yerel ortamınızda çalıştırmak için adımları izleyin:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Repoyu klonlayın:**
+   ```bash
+   git clone https://github.com/KULLANICI_ADINIZ/fabula.git
+   cd fabula
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Bağımlılıkları yükleyin:**
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+3. **Çevre Değişkenlerini Ayarlayın:**
+   `.env.local` dosyası oluşturun ve Firebase ayarlarınızı ekleyin:
+   ```env
+   NEXT_PUBLIC_FIREBASE_API_KEY=...
+   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=...
+   NEXT_PUBLIC_FIREBASE_PROJECT_ID=...
+   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=...
+   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=...
+   NEXT_PUBLIC_FIREBASE_APP_ID=...
+   
+   # Admin işlemleri için (Sadece sunucu tarafında kullanılır)
+   FIREBASE_SERVICE_ACCOUNT_KEY={...json_icerigi...}
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. **Projeyi Başlatın:**
+   ```bash
+   npm run dev
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🤝 Katkıda Bulunma
+
+1. Forklayın
+2. Yeni bir dal (branch) oluşturun (`git checkout -b ozellik/yeni-ozellik`)
+3. Değişikliklerinizi commit yapın (`git commit -m 'Yeni özellik eklendi'`)
+4. Dalınıza push yapın (`git push origin ozellik/yeni-ozellik`)
+5. Bir Pull Request oluşturun
+
+## 📄 Lisans
+
+Bu proje MIT lisansı ile lisanslanmıştır.

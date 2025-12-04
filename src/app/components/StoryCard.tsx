@@ -17,8 +17,23 @@ export default function StoryCard({ story }: StoryCardProps) {
     const router = useRouter();
     const readingTime = formatReadingTimeWithEmoji(story.content);
 
-    const formatDate = (date: Date) => {
-        return date.toLocaleDateString('tr-TR', {
+    const formatDate = (date: any) => {
+        if (!date) return '';
+
+        // Handle Firestore Timestamp
+        if (date?.toDate && typeof date.toDate === 'function') {
+            return date.toDate().toLocaleDateString('tr-TR', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // Handle string or number (timestamp)
+        const d = new Date(date);
+        if (isNaN(d.getTime())) return '';
+
+        return d.toLocaleDateString('tr-TR', {
             year: 'numeric',
             month: 'long',
             day: 'numeric'

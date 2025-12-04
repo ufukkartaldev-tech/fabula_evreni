@@ -9,7 +9,7 @@ export async function POST(
 ) {
     try {
         const { id } = await params;
-        const { nodeId, text, content, idToken } = await request.json();
+        const { nodeId, text, content, imageUrl, idToken } = await request.json();
 
         if (!idToken) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -36,10 +36,11 @@ export async function POST(
         const newProposedChoice = {
             id: uuidv4(),
             text,
-            content, // Store content in proposal too
+            content,
+            imageUrl: imageUrl || null, // Store image URL
             authorId: userId,
             authorName: userName,
-            votes: 1, // Auto-vote for self
+            votes: 1,
             voters: [userId],
             createdAt: new Date().toISOString()
         };
@@ -54,6 +55,7 @@ export async function POST(
             const newNode = {
                 id: newNextNodeId,
                 content: content || "Bu bölüm henüz yazılmadı. Devamını yazmak için düzenleyin!",
+                imageUrl: imageUrl || null,
                 choices: [],
                 isEnding: false
             };

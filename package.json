@@ -10,6 +10,7 @@
     "seed": "tsx src/lib/seedDatabase.ts"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "@types/lodash.debounce": "^4.0.9",
     "date-fns": "^4.1.0",
     "firebase": "^12.6.0",

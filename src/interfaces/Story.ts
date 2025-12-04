@@ -18,6 +18,7 @@ export interface ProposedChoice {
 export interface StoryNode {
   id: string;
   content: string;
+  imageUrl?: string; // URL of the scene image
   choices: StoryChoice[];
   proposedChoices?: ProposedChoice[];
   isEnding?: boolean;

@@ -148,6 +148,15 @@ export default function InteractiveStoryPlayer({ story, readingSettings, onProgr
         <div className="interactive-story-container">
             {/* Content Area */}
             <div className="story-content mb-8" style={containerStyle}>
+                {currentNode.imageUrl && (
+                    <div className="mb-6 rounded-lg overflow-hidden shadow-lg">
+                        <img
+                            src={currentNode.imageUrl}
+                            alt="Scene visual"
+                            className="w-full h-auto max-h-[400px] object-cover"
+                        />
+                    </div>
+                )}
                 {currentNode.content.split('\n\n').map((paragraph, index) => (
                     <p key={index} style={{ marginBottom: '1.5em' }}>{paragraph}</p>
                 ))}

@@ -256,7 +256,7 @@ export default function InteractiveStoryPlayer({ story, readingSettings, onProgr
                                 </div>
                             )
                         ) : (
-                            // Solo & Community Modes
+                            // Solo & Community Modes (Default to Community if mode is missing)
                             <div className="community-actions">
                                 <p className="text-gray-500 mb-3 text-sm">
                                     {currentNode.choices && currentNode.choices.length > 0
@@ -265,7 +265,7 @@ export default function InteractiveStoryPlayer({ story, readingSettings, onProgr
                                 </p>
                                 <button
                                     onClick={() => setIsProposeModalOpen(true)}
-                                    className={`px-6 py-3 rounded-lg font-medium transition-all transform hover:-translate-y-1 ${story.mode === 'community'
+                                    className={`px-6 py-3 rounded-lg font-medium transition-all transform hover:-translate-y-1 ${(!story.mode || story.mode === 'community')
                                         ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/30'
                                         : 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200'
                                         }`}
@@ -274,7 +274,7 @@ export default function InteractiveStoryPlayer({ story, readingSettings, onProgr
                                         ? "✨ Yeni Bir Yol Öner"
                                         : "✍️ Hikayeyi Devam Ettir"}
                                 </button>
-                                {story.mode === 'community' && (
+                                {(!story.mode || story.mode === 'community') && (
                                     <p className="text-xs text-purple-500 mt-2">Topluluk Modu: En çok oy alan devam bölümü seçilir.</p>
                                 )}
                             </div>

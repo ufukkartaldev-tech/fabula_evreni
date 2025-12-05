@@ -10,6 +10,8 @@ import { Story } from '@/interfaces/Story';
 import StoryCard from '@/app/components/StoryCard';
 import FollowButton from '@/app/components/FollowButton';
 
+import Link from 'next/link';
+
 interface ProfilePageProps {
     params: Promise<{ uid: string }>;
 }
@@ -103,15 +105,23 @@ export default function ProfilePage({ params }: ProfilePageProps) {
                         )}
                     </div>
                     <div className="profile-info">
-                        <div className="profile-name-row">
+                        <div className="profile-name-row flex items-center gap-4">
                             <h1 className="profile-name">{userProfile.displayName}</h1>
-                            {!isOwnProfile && (
+                            {!isOwnProfile ? (
                                 <FollowButton
                                     userId={uid}
                                     userName={userProfile.displayName}
                                     userAvatar={userProfile.photoURL || ''}
                                     size="medium"
                                 />
+                            ) : (
+                                <Link
+                                    href="/settings"
+                                    className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors text-sm font-medium flex items-center gap-2"
+                                >
+                                    <span>⚙️</span>
+                                    <span>Profili Düzenle</span>
+                                </Link>
                             )}
                         </div>
                         {currentBadge && (

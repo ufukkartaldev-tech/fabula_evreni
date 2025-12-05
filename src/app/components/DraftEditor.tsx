@@ -1,10 +1,13 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
-import { Draft, saveDraft, updateDraft, autoSaveDraft, deleteDraft } from '@/lib/draftService';
-import { Timestamp } from 'firebase/firestore';
+import { Draft, saveDraft, autoSaveDraft, deleteDraft } from '@/lib/draftService';
+import dynamic from 'next/dynamic';
+
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+import 'react-quill/dist/quill.snow.css';
 
 interface DraftEditorProps {
     initialDraft?: Draft;
@@ -73,6 +76,11 @@ export default function DraftEditor({ initialDraft }: DraftEditorProps) {
 
     const handlePublish = async () => {
         if (!draftId || !user) return;
+
+        if (!title.trim() || !content.trim()) {
+            alert('Lütfen başlık ve içerik alanlarını doldurun.');
+            return;
+        }
 
         setIsSaving(true);
         try {
@@ -167,13 +175,24 @@ export default function DraftEditor({ initialDraft }: DraftEditorProps) {
                     rows={3}
                 />
 
-                <textarea
-                    className="editor-content"
-                    placeholder="Hikayenizi buraya yazın..."
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                    rows={15}
-                />
+                <div className="quill-editor-container">
+                    <ReactQuill
+                        theme="snow"
+                        value={content}
+                        onChange={setContent}
+                        placeholder="Hikayenizi buraya yazın..."
+                        modules={{
+                            toolbar: [
+                                [{ 'header': [1, 2, 3, false] }],
+                                ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                                ['link'],
+                                ['clean']
+                            ],
+                        }}
+                        className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg"
+                    />
+                </div>
             </div>
         </div>
     );

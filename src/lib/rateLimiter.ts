@@ -117,3 +117,84 @@ export async function getUserTodayStoryCount(uid: string): Promise<number> {
         return 0;
     }
 }
+
+// Image Generation Limits
+const HOURLY_IMAGE_LIMIT = 10;
+
+interface ImageAction {
+    uid: string;
+    hour: string; // YYYY-MM-DD-HH format
+    count: number;
+    lastGenerated: Timestamp;
+}
+
+export async function checkUserImageLimit(uid: string): Promise<{
+    canGenerate: boolean;
+    remaining: number;
+    limit: number;
+}> {
+    const now = new Date();
+    const hourKey = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}-${now.getHours()}`;
+    const actionId = `img_${uid}_${hourKey}`;
+
+    try {
+        const docRef = doc(db, 'user_image_actions', actionId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const data = docSnap.data() as ImageAction;
+            const remaining = HOURLY_IMAGE_LIMIT - data.count;
+
+            return {
+                canGenerate: data.count < HOURLY_IMAGE_LIMIT,
+                remaining: Math.max(0, remaining),
+                limit: HOURLY_IMAGE_LIMIT
+            };
+        }
+
+        return {
+            canGenerate: true,
+            remaining: HOURLY_IMAGE_LIMIT,
+            limit: HOURLY_IMAGE_LIMIT
+        };
+    } catch (error) {
+        console.error('Error checking image limit:', error);
+        // Fail-safe: allow if error
+        return {
+            canGenerate: true,
+            remaining: HOURLY_IMAGE_LIMIT,
+            limit: HOURLY_IMAGE_LIMIT
+        };
+    }
+}
+
+export async function recordImageGeneration(uid: string): Promise<void> {
+    const now = new Date();
+    const hourKey = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}-${now.getHours()}`;
+    const actionId = `img_${uid}_${hourKey}`;
+
+    try {
+        const docRef = doc(db, 'user_image_actions', actionId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const data = docSnap.data() as ImageAction;
+            await setDoc(docRef, {
+                uid,
+                hour: hourKey,
+                count: data.count + 1,
+                lastGenerated: Timestamp.now()
+            });
+        } else {
+            await setDoc(docRef, {
+                uid,
+                hour: hourKey,
+                count: 1,
+                lastGenerated: Timestamp.now()
+            });
+        }
+    } catch (error) {
+        console.error('Error recording image generation:', error);
+        throw error;
+    }
+}

@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Story } from '@/interfaces/Story';
@@ -80,7 +81,13 @@ export default function StoryCard({ story }: StoryCardProps) {
                 <div className="author-info">
                     <span className="author-avatar">
                         {story.author.avatar.startsWith('http') ? (
-                            <img src={story.author.avatar} alt={story.author.name} className="w-6 h-6 rounded-full object-cover" />
+                            <Image
+                                src={story.author.avatar}
+                                alt={story.author.name}
+                                width={24}
+                                height={24}
+                                className="rounded-full object-cover"
+                            />
                         ) : (
                             story.author.avatar
                         )}

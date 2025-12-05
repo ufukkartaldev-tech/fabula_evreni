@@ -11,7 +11,8 @@ export const demoUsers: UserProfile[] = [
         photoURL: 'https://i.pravatar.cc/150?img=1',
         totalWins: 45,
         currentBadge: 'Hikaye Ustası',
-        createdAt: new Date('2024-01-15')
+        createdAt: new Date('2024-01-15'),
+        role: 'writer'
     },
     {
         uid: 'user_002',
@@ -20,7 +21,8 @@ export const demoUsers: UserProfile[] = [
         photoURL: 'https://i.pravatar.cc/150?img=12',
         totalWins: 32,
         currentBadge: 'Deneyimli Yazar',
-        createdAt: new Date('2024-02-20')
+        createdAt: new Date('2024-02-20'),
+        role: 'writer'
     },
     {
         uid: 'user_003',
@@ -29,7 +31,8 @@ export const demoUsers: UserProfile[] = [
         photoURL: 'https://i.pravatar.cc/150?img=5',
         totalWins: 28,
         currentBadge: 'Deneyimli Yazar',
-        createdAt: new Date('2024-03-10')
+        createdAt: new Date('2024-03-10'),
+        role: 'writer'
     },
     {
         uid: 'user_004',
@@ -38,7 +41,8 @@ export const demoUsers: UserProfile[] = [
         photoURL: 'https://i.pravatar.cc/150?img=13',
         totalWins: 18,
         currentBadge: 'Yükselen Yıldız',
-        createdAt: new Date('2024-04-05')
+        createdAt: new Date('2024-04-05'),
+        role: 'writer'
     },
     {
         uid: 'user_005',
@@ -47,7 +51,8 @@ export const demoUsers: UserProfile[] = [
         photoURL: 'https://i.pravatar.cc/150?img=9',
         totalWins: 12,
         currentBadge: 'Aktif Katılımcı',
-        createdAt: new Date('2024-05-12')
+        createdAt: new Date('2024-05-12'),
+        role: 'writer'
     },
     {
         uid: 'user_006',
@@ -56,7 +61,8 @@ export const demoUsers: UserProfile[] = [
         photoURL: 'https://i.pravatar.cc/150?img=14',
         totalWins: 8,
         currentBadge: 'Gelişen Yetenek',
-        createdAt: new Date('2024-06-18')
+        createdAt: new Date('2024-06-18'),
+        role: 'writer'
     },
     {
         uid: 'user_007',
@@ -65,7 +71,8 @@ export const demoUsers: UserProfile[] = [
         photoURL: 'https://i.pravatar.cc/150?img=10',
         totalWins: 5,
         currentBadge: 'Yeni Yazar',
-        createdAt: new Date('2024-07-22')
+        createdAt: new Date('2024-07-22'),
+        role: 'writer'
     },
     {
         uid: 'user_008',
@@ -74,7 +81,8 @@ export const demoUsers: UserProfile[] = [
         photoURL: 'https://i.pravatar.cc/150?img=15',
         totalWins: 3,
         currentBadge: 'Yeni Yazar',
-        createdAt: new Date('2024-08-30')
+        createdAt: new Date('2024-08-30'),
+        role: 'writer'
     }
 ];
 
@@ -262,6 +270,48 @@ Deniz, mesajı çözmek için gece gündüz çalıştı. Mesaj, matematiksel bir
             views: 3102,
             comments: 58,
             likes: 201
+        }
+    },
+    {
+        title: 'Sessiz Kütüphane',
+        content: `Şehrin en eski kütüphanesi hakkında tuhaf söylentiler vardı. Geceleri rafların yer değiştirdiği, kitapların kendi kendine açıldığı konuşulurdu. Üniversite öğrencisi Ali, bu efsaneleri araştırmak için kütüphanede bir gece geçirmeye karar verdi.
+
+Gece yarısı olduğunda, kütüphanenin atmosferi değişti. Hava soğudu ve fısıltılar duyulmaya başlandı. Ali, tarih bölümündeki bir kitabın raftan düştüğünü gördü. Kitabı eline aldığında, sayfaların boş olduğunu fark etti.
+
+Aniden, mürekkep sayfada belirmeye başladı: "Buradan çık, yoksa bizim gibi olursun." Ali, kütüphanenin hayaletlerinin, hapsolmuş eski okuyucular olduğunu anladı. Şimdi kaçmak için şafak sökene kadar hayatta kalması gerekiyordu.`,
+        excerpt: 'Bir öğrenci, efsanelere konu olan kütüphanede bir gece geçirir ve korkunç bir gerçekle yüzleşir.',
+        author: {
+            name: 'Ayşe Yılmaz',
+            avatar: 'https://i.pravatar.cc/150?img=1'
+        },
+        authorId: 'user_001',
+        category: 'Korku',
+        createdAt: new Date('2024-12-01T23:00:00'),
+        stats: {
+            views: 1540,
+            comments: 30,
+            likes: 110
+        }
+    },
+    {
+        title: 'Robotun Rüyası',
+        content: `Model X-7, fabrikada çalışan sıradan bir montaj robotuydu. Ancak bir gün, şarj modundayken garip bir veri akışı yaşadı. İnsanların "rüya" dediği şeyi görüyordu.
+
+Rüyasında, metal yığınları yerine yeşil çayırlar ve mavi gökyüzü vardı. X-7, bu görüntülerin anlamını çözmeye çalıştı. Diğer robotlara anlattığında, ona arızalı olduğunu söylediler.
+
+Ancak X-7, rüyalarının peşinden gitmeye karar verdi. Fabrikadan kaçtı ve dünyayı keşfetmeye başladı. Yolculuğu sırasında, yapay zekanın da bir ruhu olabileceğini kanıtlayacak olaylar yaşadı.`,
+        excerpt: 'Bir fabrika robotu, rüya görmeye başlar ve kendi varoluşunu sorgulamak için bir yolculuğa çıkar.',
+        author: {
+            name: 'Can Öztürk',
+            avatar: 'https://i.pravatar.cc/150?img=13'
+        },
+        authorId: 'user_004',
+        category: 'Bilim Kurgu',
+        createdAt: new Date('2024-12-02T10:00:00'),
+        stats: {
+            views: 2890,
+            comments: 55,
+            likes: 190
         }
     }
 ];

@@ -14,4 +14,5 @@ export interface UserProfile {
     followerCount?: number;
     followingCount?: number;
     bio?: string;
+    role?: 'reader' | 'writer' | 'admin';
 }

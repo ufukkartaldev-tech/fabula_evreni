@@ -26,7 +26,8 @@ export async function createUserProfile(user: User): Promise<UserProfile> {
         xp: 0,
         currentBadge: initialBadge.name,
         createdAt: Timestamp.now(),
-        lastUpdated: Timestamp.now()
+        lastUpdated: Timestamp.now(),
+        role: 'writer'
     };
 
     try {
@@ -89,29 +90,53 @@ export async function updateUserXP(uid: string, amount: number): Promise<{ newBa
 
 /**
  * Auth user ile Firestore user'ı senkronize et
- * Eğer profil yoksa oluştur, varsa güncelle
+ * Profil yoksa oluşturur.
+ * Profil varsa, eksik temel alanları (rozet, rol vb.) tamamlar ve bilgileri günceller.
  */
 export async function syncUserProfile(user: User): Promise<UserProfile> {
     try {
-        let profile = await getUserProfile(user.uid);
+        const docRef = doc(db, 'users', user.uid);
+        const docSnap = await getDoc(docRef);
 
-        if (!profile) {
-            // Profil yoksa oluştur
-            profile = await createUserProfile(user);
+        if (!docSnap.exists()) {
+            // 1. Profil hiç yoksa, sıfırdan oluştur
+            console.log(`Profil bulunamadı, yeni profil oluşturuluyor: ${user.uid}`);
+            return await createUserProfile(user);
         } else {
-            // Profil varsa sadece temel bilgileri güncelle (rozet ve wins değişmez)
-            await updateDoc(doc(db, 'users', user.uid), {
-                email: user.email || profile.email,
-                displayName: user.displayName || profile.displayName,
-                photoURL: user.photoURL,
-                lastUpdated: serverTimestamp()
-            });
+            // 2. Profil varsa, veriyi al ve eksik alanları kontrol et
+            const profile = docSnap.data() as UserProfile;
+            const updates: Partial<UserProfile> = {};
 
-            // Güncellenmiş profili getir
-            profile = await getUserProfile(user.uid) || profile;
+            // Google/Auth'dan gelen temel bilgileri güncelle
+            updates.email = user.email || profile.email;
+            updates.displayName = user.displayName || profile.displayName;
+            updates.photoURL = user.photoURL || profile.photoURL;
+
+            // --- EKSİK ALANLARI TAMAMLAYAN BLOK ---
+            if (profile.role === undefined) {
+                updates.role = 'writer'; // Eksik rolü ekle
+                console.log(`Eksik 'role' alanı tamamlanıyor: ${user.uid}`);
+            }
+            if (profile.currentBadge === undefined) {
+                updates.currentBadge = BADGES[0].name; // Eksik rozeti ekle
+                console.log(`Eksik 'currentBadge' alanı tamamlanıyor: ${user.uid}`);
+            }
+            if (profile.xp === undefined) {
+                updates.xp = 0; // Eksik xp'yi ekle
+            }
+            // -----------------------------------------
+
+            // Eğer en az bir güncelleme varsa, Firestore'a yaz
+            if (Object.keys(updates).length > 0) {
+                await updateDoc(docRef, {
+                    ...updates,
+                    lastUpdated: serverTimestamp()
+                });
+            }
+
+            // Güncellenmiş veya mevcut profili döndür
+            return { ...profile, ...updates };
         }
-
-        return profile;
     } catch (error) {
         console.error('Error syncing user profile:', error);
         throw error;

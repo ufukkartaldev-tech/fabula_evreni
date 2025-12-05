@@ -56,7 +56,15 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
             onClose();
             resetForm();
         } catch (err: any) {
-            setError(err.message);
+            console.error('Auth error:', err);
+            // Firebase error codes mapping could be added here for better messages
+            let message = err.message || 'Bir hata oluştu.';
+            if (message.includes('auth/invalid-credential') || message.includes('auth/user-not-found') || message.includes('auth/wrong-password')) {
+                message = 'E-posta veya şifre hatalı.';
+            } else if (message.includes('auth/email-already-in-use')) {
+                message = 'Bu e-posta adresi zaten kullanımda.';
+            }
+            setError(message);
         } finally {
             setLoading(false);
         }

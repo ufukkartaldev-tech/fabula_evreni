@@ -1147,6 +1147,7 @@ body {
   font-size: 1.25rem;
   opacity: 0.6;
   transition: opacity 0.3s ease;
+  z-index: 10;
 }
 
 .password-toggle:hover {
@@ -2271,4 +2272,46 @@ body {
   .badges-grid {
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   }
+}
+
+/* React Quill Customization */
+.quill-editor-container {
+  margin-top: 1rem;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .quill-editor-container {
+  background: #1f2937;
+  border: 1px solid #374151;
+}
+
+[data-theme="dark"] .ql-toolbar {
+  background: #374151;
+  border-color: #4b5563 !important;
+  color: #e5e7eb;
+}
+
+[data-theme="dark"] .ql-container {
+  border-color: #4b5563 !important;
+  color: #e5e7eb;
+}
+
+[data-theme="dark"] .ql-stroke {
+  stroke: #e5e7eb !important;
+}
+
+[data-theme="dark"] .ql-fill {
+  fill: #e5e7eb !important;
+}
+
+[data-theme="dark"] .ql-picker {
+  color: #e5e7eb !important;
+}
+
+.ql-editor {
+  min-height: 300px;
+  font-size: 1.1rem;
+  line-height: 1.6;
 }

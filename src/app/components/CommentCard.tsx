@@ -33,7 +33,17 @@ export default function CommentCard({ comment, depth = 0 }: CommentCardProps) {
             <div className="comment-card">
                 <div className="comment-header">
                     <div className="comment-author">
-                        <span className="author-avatar">{comment.author.avatar}</span>
+                        <span className="author-avatar">
+                            {comment.author.avatar.startsWith('http') ? (
+                                <img
+                                    src={comment.author.avatar}
+                                    alt={comment.author.name}
+                                    className="w-8 h-8 rounded-full object-cover"
+                                />
+                            ) : (
+                                comment.author.avatar
+                            )}
+                        </span>
                         <div className="author-info">
                             <span className="author-name">{comment.author.name}</span>
                             <span className="comment-date">{formatDate(comment.createdAt)}</span>

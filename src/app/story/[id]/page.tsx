@@ -14,6 +14,7 @@ import ReadingSettings, { ReadingSettingsState } from '@/app/components/ReadingS
 import InteractiveStoryPlayer from '@/app/components/InteractiveStoryPlayer';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
+import ProposeBranchModal from '@/app/components/ProposeBranchModal';
 
 interface StoryPageProps {
     params: Promise<{ id: string }>;
@@ -37,6 +38,7 @@ export default function StoryPage({ params }: StoryPageProps) {
         size: 'medium',
         theme: 'light'
     });
+    const [isProposeModalOpen, setIsProposeModalOpen] = useState(false);
 
     useEffect(() => {
         // Load reading settings
@@ -384,9 +386,38 @@ export default function StoryPage({ params }: StoryPageProps) {
                                     }}
                                 />
                             ) : (
-                                story.content.split('\n\n').map((paragraph, index) => (
-                                    <p key={index} style={{ marginBottom: '1.5em' }}>{paragraph}</p>
-                                ))
+                                <>
+                                    {story.content.split('\n\n').map((paragraph, index) => (
+                                        <p key={index} style={{ marginBottom: '1.5em' }}>{paragraph}</p>
+                                    ))}
+
+                                    {/* Continue Story Button for Linear Stories */}
+                                    {user && (
+                                        <div className="mt-12 text-center border-t border-gray-200 dark:border-gray-700 pt-8">
+                                            <p className="text-gray-500 mb-4 text-sm">
+                                                Bu hikaye henüz dallanmadı. İlk alternatif yolu sen öner!
+                                            </p>
+                                            <button
+                                                onClick={() => setIsProposeModalOpen(true)}
+                                                className="px-6 py-3 rounded-lg font-medium transition-all transform hover:-translate-y-1 bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/30"
+                                            >
+                                                ✨ Hikayeyi Devam Ettir
+                                            </button>
+                                            <p className="text-xs text-purple-500 mt-2">Topluluk Modu: En çok oy alan devam bölümü seçilir.</p>
+                                        </div>
+                                    )}
+
+                                    <ProposeBranchModal
+                                        isOpen={isProposeModalOpen}
+                                        onClose={() => setIsProposeModalOpen(false)}
+                                        storyId={story.id}
+                                        nodeId="start" // Using 'start' as dummy node ID for linear stories
+                                        isContinuation={true}
+                                        onSuccess={() => {
+                                            window.location.reload();
+                                        }}
+                                    />
+                                </>
                             )}
                         </div>
                     )}

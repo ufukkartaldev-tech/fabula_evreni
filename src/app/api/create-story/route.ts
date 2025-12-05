@@ -5,7 +5,7 @@ import { FieldValue } from 'firebase-admin/firestore';
 
 export async function POST(request: Request) {
     try {
-        const { title, content, excerpt, category, coverImage, idToken } = await request.json();
+        const { title, content, excerpt, category, coverImage, mode, idToken } = await request.json();
 
         // 1. Yetkilendirme Kontrolü
         if (!idToken) {
@@ -46,7 +46,8 @@ export async function POST(request: Request) {
                 likes: 0,
                 comments: 0
             },
-            type: 'linear', // Varsayılan olarak lineer, ileride interaktif seçeneği eklenebilir
+            type: mode === 'solo' ? 'linear' : 'interactive',
+            mode: mode || 'solo',
             status: 'ACTIVE'
         };
 

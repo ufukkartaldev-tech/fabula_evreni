@@ -42,6 +42,8 @@ export interface Story {
     likes: number;
   };
   type?: 'linear' | 'interactive';
+  mode?: 'solo' | 'community' | 'chain'; // Storytelling mode
+  currentTurnUserId?: string; // For chain stories
   nodes?: Record<string, StoryNode>;
   startNodeId?: string;
   status?: 'ACTIVE' | 'DELETED';

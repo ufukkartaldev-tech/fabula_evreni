@@ -8,6 +8,7 @@ export interface Draft {
     excerpt: string;
     category: string;
     coverImage?: string;
+    mode?: 'solo' | 'community' | 'chain';
     lastSaved: Timestamp;
     createdAt: Timestamp;
     autoSaveEnabled: boolean;

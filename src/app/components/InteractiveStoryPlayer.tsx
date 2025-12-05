@@ -235,22 +235,50 @@ export default function InteractiveStoryPlayer({ story, readingSettings, onProgr
                     </div>
                 )}
 
-                {/* Propose Branch Button */}
+                {/* Community & Chain Mode Actions */}
                 {user && !currentNode.isEnding && (
                     <div className="mt-8 text-center">
-                        <p className="text-gray-500 mb-2 text-sm">
-                            {currentNode.choices && currentNode.choices.length > 0
-                                ? "Aklında başka bir yol mu var?"
-                                : "Hikaye burada bitmesin..."}
-                        </p>
-                        <button
-                            onClick={() => setIsProposeModalOpen(true)}
-                            className="px-4 py-2 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 rounded-lg hover:bg-indigo-200 dark:hover:bg-indigo-900/50 transition-colors text-sm font-medium"
-                        >
-                            {currentNode.choices && currentNode.choices.length > 0
-                                ? "✨ Yeni Bir Yol Öner"
-                                : "✍️ Hikayeyi Devam Ettir"}
-                        </button>
+                        {story.mode === 'chain' ? (
+                            story.currentTurnUserId === user.uid ? (
+                                <div className="chain-mode-action p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-200 dark:border-green-800">
+                                    <p className="text-green-800 dark:text-green-200 font-bold mb-2">Sıra Sende! 🎯</p>
+                                    <p className="text-sm text-green-700 dark:text-green-300 mb-4">Hikayenin kaderi senin ellerinde.</p>
+                                    <button
+                                        onClick={() => setIsProposeModalOpen(true)}
+                                        className="w-full py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-bold transition-colors shadow-lg shadow-green-500/30"
+                                    >
+                                        ✍️ Bölümü Yaz ve Pasla
+                                    </button>
+                                </div>
+                            ) : (
+                                <div className="chain-mode-waiting p-4 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 opacity-70">
+                                    <p className="text-gray-600 dark:text-gray-400 font-medium">Sıra şu an başka bir yazarda...</p>
+                                </div>
+                            )
+                        ) : (
+                            // Solo & Community Modes
+                            <div className="community-actions">
+                                <p className="text-gray-500 mb-3 text-sm">
+                                    {currentNode.choices && currentNode.choices.length > 0
+                                        ? "Aklında başka bir yol mu var?"
+                                        : "Hikaye burada bitmesin..."}
+                                </p>
+                                <button
+                                    onClick={() => setIsProposeModalOpen(true)}
+                                    className={`px-6 py-3 rounded-lg font-medium transition-all transform hover:-translate-y-1 ${story.mode === 'community'
+                                        ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/30'
+                                        : 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200'
+                                        }`}
+                                >
+                                    {currentNode.choices && currentNode.choices.length > 0
+                                        ? "✨ Yeni Bir Yol Öner"
+                                        : "✍️ Hikayeyi Devam Ettir"}
+                                </button>
+                                {story.mode === 'community' && (
+                                    <p className="text-xs text-purple-500 mt-2">Topluluk Modu: En çok oy alan devam bölümü seçilir.</p>
+                                )}
+                            </div>
+                        )}
                     </div>
                 )}
 

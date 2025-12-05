@@ -22,6 +22,7 @@ export default function DraftEditor({ initialDraft }: DraftEditorProps) {
     const [category, setCategory] = useState(initialDraft?.category || '');
     const [excerpt, setExcerpt] = useState(initialDraft?.excerpt || '');
     const [coverImage, setCoverImage] = useState(initialDraft?.coverImage || '');
+    const [mode, setMode] = useState<'solo' | 'community' | 'chain'>(initialDraft?.mode || 'solo');
 
     const [draftId, setDraftId] = useState(initialDraft?.id || null);
     const [isSaving, setIsSaving] = useState(false);
@@ -44,6 +45,7 @@ export default function DraftEditor({ initialDraft }: DraftEditorProps) {
                 category,
                 excerpt,
                 coverImage,
+                mode,
                 autoSaveEnabled: true
             };
 
@@ -72,7 +74,7 @@ export default function DraftEditor({ initialDraft }: DraftEditorProps) {
 
         const timeoutId = setTimeout(saveData, 2000); // 2 saniye debounce
         return () => clearTimeout(timeoutId);
-    }, [title, content, category, excerpt, coverImage, user, draftId]);
+    }, [title, content, category, excerpt, coverImage, mode, user, draftId]);
 
     const handlePublish = async () => {
         if (!draftId || !user) return;
@@ -99,6 +101,7 @@ export default function DraftEditor({ initialDraft }: DraftEditorProps) {
                     excerpt,
                     category,
                     coverImage,
+                    mode,
                     idToken
                 }),
             });
@@ -132,7 +135,15 @@ export default function DraftEditor({ initialDraft }: DraftEditorProps) {
                     {saveStatus === 'saved' && lastSaved && `Son kayıt: ${lastSaved.toLocaleTimeString()}`}
                     {saveStatus === 'error' && 'Kayıt hatası!'}
                 </div>
-                <div className="editor-actions">
+                <div className="editor-actions flex gap-2">
+                    <button
+                        className="generate-image-button px-4 py-2 bg-pink-600 hover:bg-pink-700 text-white rounded-lg font-medium transition-colors flex items-center gap-2"
+                        onClick={() => alert('Yapay zeka görsel oluşturma özelliği yakında eklenecek! 🎨')}
+                        title="Yapay Zeka ile Görsel Oluştur"
+                    >
+                        <span>🎨</span>
+                        <span className="hidden md:inline">Görsel Oluştur</span>
+                    </button>
                     <button
                         className="publish-button"
                         onClick={handlePublish}
@@ -166,6 +177,44 @@ export default function DraftEditor({ initialDraft }: DraftEditorProps) {
                     <option value="Dram">Dram</option>
                     <option value="Komedi">Komedi</option>
                 </select>
+
+                <div className="mode-selector mb-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Hikaye Modu</label>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <button
+                            className={`p-3 rounded-lg border text-left transition-all ${mode === 'solo'
+                                ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900/20 ring-2 ring-indigo-200 dark:ring-indigo-800'
+                                : 'border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600'
+                                }`}
+                            onClick={() => setMode('solo')}
+                        >
+                            <div className="font-semibold text-gray-900 dark:text-white mb-1">👤 Solo Yazar</div>
+                            <div className="text-xs text-gray-500 dark:text-gray-400">Klasik hikaye yazımı. Sadece siz yazarsınız.</div>
+                        </button>
+
+                        <button
+                            className={`p-3 rounded-lg border text-left transition-all ${mode === 'community'
+                                ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/20 ring-2 ring-purple-200 dark:ring-purple-800'
+                                : 'border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600'
+                                }`}
+                            onClick={() => setMode('community')}
+                        >
+                            <div className="font-semibold text-gray-900 dark:text-white mb-1">👥 Topluluk Odaklı</div>
+                            <div className="text-xs text-gray-500 dark:text-gray-400">Okuyucular devam bölümleri önerebilir ve oylayabilir.</div>
+                        </button>
+
+                        <button
+                            className={`p-3 rounded-lg border text-left transition-all ${mode === 'chain'
+                                ? 'border-green-500 bg-green-50 dark:bg-green-900/20 ring-2 ring-green-200 dark:ring-green-800'
+                                : 'border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600'
+                                }`}
+                            onClick={() => setMode('chain')}
+                        >
+                            <div className="font-semibold text-gray-900 dark:text-white mb-1">🔗 Zincirleme</div>
+                            <div className="text-xs text-gray-500 dark:text-gray-400">Sırayla yazın. Pası istediğiniz yazara atın.</div>
+                        </button>
+                    </div>
+                </div>
 
                 <textarea
                     className="editor-excerpt"

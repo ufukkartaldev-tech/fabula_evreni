@@ -23,8 +23,61 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Fabula - Hikayelerin Buluşma Noktası",
-  description: "Hikayeleri keşfedin, okuyun ve yorumlayın. Fabula ile hikaye dünyasına katılın.",
+  title: {
+    default: "Fabula - İnteraktif Hikaye Platformu",
+    template: "%s | Fabula"
+  },
+  description: "Kullanıcıların birlikte hikayeler oluşturabildiği, okuyabildiği ve hikayelerin gidişatına yön verebildiği modern bir hikaye platformu. İnteraktif hikayeler, oyunlaştırma ve sosyal özelliklerle dolu!",
+  keywords: ["hikaye", "interaktif hikaye", "storytelling", "yazarlık", "okuma", "hikaye yazma", "topluluk", "oyunlaştırma", "next.js", "react"],
+  authors: [{ name: "Ufuk Kartal" }],
+  creator: "Ufuk Kartal",
+  publisher: "Fabula",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL('https://fabula-evreni.vercel.app'),
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: "Fabula - İnteraktif Hikaye Platformu",
+    description: "Kullanıcıların birlikte hikayeler oluşturabildiği, okuyabildiği ve hikayelerin gidişatına yön verebildiği modern bir hikaye platformu",
+    url: 'https://fabula-evreni.vercel.app',
+    siteName: 'Fabula',
+    locale: 'tr_TR',
+    type: 'website',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Fabula - İnteraktif Hikaye Platformu',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Fabula - İnteraktif Hikaye Platformu",
+    description: "Kullanıcıların birlikte hikayeler oluşturabildiği modern hikaye platformu",
+    images: ['/og-image.png'],
+    creator: '@ufukkartal',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'your-google-verification-code',
+  },
 };
 
 export default function RootLayout({

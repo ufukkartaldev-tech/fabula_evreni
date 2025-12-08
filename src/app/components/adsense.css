@@ -1,0 +1,172 @@
+/* AdSense Banner Styles */
+.ad-banner-container {
+    position: relative;
+    margin: 2rem auto;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.ad-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary, #666);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    opacity: 0.7;
+}
+
+/* Dark mode support */
+[data-theme="dark"] .ad-label {
+    color: var(--text-secondary-dark, #999);
+}
+
+/* Top Banner Styles */
+.top-banner-wrapper {
+    width: 100%;
+    background: var(--card-bg, #ffffff);
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+}
+
+[data-theme="dark"] .top-banner-wrapper {
+    background: var(--card-bg-dark, #1a1a1a);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Sidebar Banner Styles */
+.sidebar-banner-wrapper {
+    position: sticky;
+    top: 100px;
+    background: var(--card-bg, #ffffff);
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .sidebar-banner-wrapper {
+    background: var(--card-bg-dark, #1a1a1a);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* In-Article Banner Styles */
+.in-article-banner-wrapper {
+    margin: 3rem auto;
+    padding: 1.5rem;
+    background: linear-gradient(135deg,
+            rgba(99, 102, 241, 0.05) 0%,
+            rgba(168, 85, 247, 0.05) 100%);
+    border-radius: 16px;
+    border: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+[data-theme="dark"] .in-article-banner-wrapper {
+    background: linear-gradient(135deg,
+            rgba(99, 102, 241, 0.1) 0%,
+            rgba(168, 85, 247, 0.1) 100%);
+    border-color: rgba(99, 102, 241, 0.2);
+}
+
+/* In-Feed Banner Styles (Hikaye listesi arası) */
+.in-feed-banner-wrapper {
+    grid-column: 1 / -1;
+    /* Full width in grid */
+    background: var(--card-bg, #ffffff);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 2px dashed rgba(99, 102, 241, 0.2);
+    transition: all 0.3s ease;
+}
+
+.in-feed-banner-wrapper:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    border-color: rgba(99, 102, 241, 0.3);
+}
+
+[data-theme="dark"] .in-feed-banner-wrapper {
+    background: var(--card-bg-dark, #1a1a1a);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    border-color: rgba(99, 102, 241, 0.3);
+}
+
+[data-theme="dark"] .in-feed-banner-wrapper:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+    border-color: rgba(99, 102, 241, 0.4);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .ad-banner-container {
+        margin: 1.5rem auto;
+    }
+
+    .top-banner-wrapper,
+    .in-article-banner-wrapper,
+    .in-feed-banner-wrapper {
+        padding: 1rem;
+    }
+
+    .sidebar-banner-wrapper {
+        position: relative;
+        top: 0;
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Loading State */
+.ad-banner-container.loading {
+    min-height: 250px;
+    background: linear-gradient(90deg,
+            rgba(99, 102, 241, 0.05) 0%,
+            rgba(168, 85, 247, 0.05) 50%,
+            rgba(99, 102, 241, 0.05) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+    border-radius: 12px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* AdSense ins element */
+.adsbygoogle {
+    display: block;
+    min-height: 50px;
+    background: transparent;
+}
+
+/* Placeholder for development */
+.ad-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+    background: linear-gradient(135deg,
+            rgba(99, 102, 241, 0.1) 0%,
+            rgba(168, 85, 247, 0.1) 100%);
+    border-radius: 12px;
+    border: 2px dashed rgba(99, 102, 241, 0.3);
+    color: var(--text-secondary, #666);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+[data-theme="dark"] .ad-placeholder {
+    background: linear-gradient(135deg,
+            rgba(99, 102, 241, 0.15) 0%,
+            rgba(168, 85, 247, 0.15) 100%);
+    border-color: rgba(99, 102, 241, 0.4);
+    color: var(--text-secondary-dark, #999);
+}

@@ -15,6 +15,12 @@ import InteractiveStoryPlayer from '@/app/components/InteractiveStoryPlayer';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 import ProposeBranchModal from '@/app/components/ProposeBranchModal';
+import { InArticleBanner } from '@/app/components/AdBanner';
+import TextToSpeech from '@/app/components/TextToSpeech';
+import '@/app/components/texttospeech.css';
+import PredictionForm from '@/app/components/PredictionForm';
+import PredictionList from '@/app/components/PredictionList';
+import '@/app/components/predictions.css';
 
 interface StoryPageProps {
     params: Promise<{ id: string }>;
@@ -39,6 +45,7 @@ export default function StoryPage({ params }: StoryPageProps) {
         theme: 'light'
     });
     const [isProposeModalOpen, setIsProposeModalOpen] = useState(false);
+    const [predictionRefresh, setPredictionRefresh] = useState(0);
 
     useEffect(() => {
         // Load reading settings
@@ -333,6 +340,14 @@ export default function StoryPage({ params }: StoryPageProps) {
                         </div>
                     </header>
 
+                    {/* Text-to-Speech Component */}
+                    {story.type !== 'interactive' && !isEditing && (
+                        <TextToSpeech
+                            text={story.content}
+                            title={story.title}
+                        />
+                    )}
+
                     {story.type === 'interactive' && story.nodes ? (
                         <InteractiveStoryPlayer
                             story={story}
@@ -422,6 +437,26 @@ export default function StoryPage({ params }: StoryPageProps) {
                         </div>
                     )}
                 </article>
+
+                {/* In-Article Banner Ad */}
+                <div className="in-article-banner-wrapper">
+                    <InArticleBanner />
+                </div>
+
+                {/* Prediction System */}
+                {story.type !== 'interactive' && (
+                    <>
+                        <PredictionForm
+                            storyId={id}
+                            storyTitle={story.title}
+                            onPredictionCreated={() => setPredictionRefresh(prev => prev + 1)}
+                        />
+                        <PredictionList
+                            storyId={id}
+                            refreshTrigger={predictionRefresh}
+                        />
+                    </>
+                )}
 
                 <CommentSection
                     storyId={id}

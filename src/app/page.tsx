@@ -5,6 +5,7 @@ import StoryCard from './components/StoryCard';
 import SearchBar from './components/SearchBar';
 import FilterPanel from './components/FilterPanel';
 import { StoryGridSkeleton } from './components/SkeletonLoader';
+import { TopBanner, InFeedBanner } from './components/AdBanner';
 import { Story } from '@/interfaces/Story';
 import { getStoriesPaginated } from '@/lib/firestore';
 import { searchStories, getAllCategories, getAllAuthors, SearchFilters, SortOption } from '@/lib/searchService';
@@ -166,6 +167,11 @@ export default function Home() {
           />
         </div>
 
+        {/* Top Banner Ad */}
+        <div className="top-banner-wrapper">
+          <TopBanner />
+        </div>
+
         {/* Top Stories Section */}
         {!searchQuery && !selectedCategory && !selectedAuthor && topStories.length > 0 && (
           <div className="top-stories-section mb-12">
@@ -205,8 +211,16 @@ export default function Home() {
         ) : (
           <>
             <div className="stories-grid">
-              {filteredStories.map((story) => (
-                <StoryCard key={story.id} story={story} />
+              {filteredStories.map((story, index) => (
+                <>
+                  <StoryCard key={story.id} story={story} />
+                  {/* Her 6 hikayede bir reklam göster */}
+                  {(index + 1) % 6 === 0 && index !== filteredStories.length - 1 && (
+                    <div key={`ad-${index}`} className="in-feed-banner-wrapper">
+                      <InFeedBanner />
+                    </div>
+                  )}
+                </>
               ))}
             </div>
 

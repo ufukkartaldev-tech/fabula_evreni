@@ -9,9 +9,18 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![Firebase](https://img.shields.io/badge/Firebase-12-orange?logo=firebase)](https://firebase.google.com/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38bdf8?logo=tailwind-css)](https://tailwindcss.com/)
+
 [![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 [![Tests](https://img.shields.io/badge/tests-136%2B-brightgreen)](./TEST_SUMMARY.md)
+[![Coverage](https://img.shields.io/badge/coverage-80%25%2B-brightgreen)](./TEST_SUMMARY.md)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
+
+![GitHub stars](https://img.shields.io/github/stars/ufukkartaldev-tech/fabula_evreni?style=social)
+![GitHub forks](https://img.shields.io/github/forks/ufukkartaldev-tech/fabula_evreni?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/ufukkartaldev-tech/fabula_evreni?style=social)
+![GitHub last commit](https://img.shields.io/github/last-commit/ufukkartaldev-tech/fabula_evreni)
+![GitHub issues](https://img.shields.io/github/issues/ufukkartaldev-tech/fabula_evreni)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/ufukkartaldev-tech/fabula_evreni)
 
 **Kullanıcıların birlikte hikayeler oluşturabildiği, okuyabildiği ve hikayelerin gidişatına yön verebildiği modern bir hikaye platformu**
 

@@ -53,6 +53,7 @@ firestore.rules
 # Also ignore any potential service account keys
 *.json
 !package.json
+!package-lock.json
 !tsconfig.json
 !jsconfig.json
 !next.config.js

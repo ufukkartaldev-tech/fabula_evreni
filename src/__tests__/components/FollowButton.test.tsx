@@ -30,7 +30,7 @@ describe('FollowButton Component', () => {
         const { isFollowing } = require('@/lib/followService')
         vi.mocked(isFollowing).mockResolvedValue(false)
 
-        render(<FollowButton userId={targetUserId} userName=" Test User\ userAvatar=\https://example.com/avatar.jpg\ />)
+        render(<FollowButton userId={targetUserId} userName="Test User" userAvatar="https://example.com/avatar.jpg" />)
 
         await waitFor(() => {
             expect(screen.getByText('Takip Et')).toBeInTheDocument()
@@ -41,7 +41,7 @@ describe('FollowButton Component', () => {
         const { isFollowing } = require('@/lib/followService')
         vi.mocked(isFollowing).mockResolvedValue(true)
 
-        render(<FollowButton userId={targetUserId} userName=" Test User\ userAvatar=\https://example.com/avatar.jpg\ />)
+        render(<FollowButton userId={targetUserId} userName="Test User" userAvatar="https://example.com/avatar.jpg" />)
 
         await waitFor(() => {
             expect(screen.getByText('Takiptesin')).toBeInTheDocument()
@@ -55,7 +55,7 @@ describe('FollowButton Component', () => {
         vi.mocked(isFollowing).mockResolvedValue(false)
         vi.mocked(followUser).mockResolvedValue({ success: true })
 
-        render(<FollowButton userId={targetUserId} userName=" Test User\ userAvatar=\https://example.com/avatar.jpg\ />)
+        render(<FollowButton userId={targetUserId} userName="Test User" userAvatar="https://example.com/avatar.jpg" />)
 
         await waitFor(() => {
             expect(screen.getByText('Takip Et')).toBeInTheDocument()
@@ -76,7 +76,7 @@ describe('FollowButton Component', () => {
         vi.mocked(isFollowing).mockResolvedValue(true)
         vi.mocked(unfollowUser).mockResolvedValue({ success: true })
 
-        render(<FollowButton userId={targetUserId} userName=" Test User\ userAvatar=\https://example.com/avatar.jpg\ />)
+        render(<FollowButton userId={targetUserId} userName="Test User" userAvatar="https://example.com/avatar.jpg" />)
 
         await waitFor(() => {
             expect(screen.getByText('Takiptesin')).toBeInTheDocument()
@@ -97,7 +97,7 @@ describe('FollowButton Component', () => {
         vi.mocked(isFollowing).mockResolvedValue(false)
         vi.mocked(followUser).mockResolvedValue({ success: true })
 
-        render(<FollowButton userId={targetUserId} userName=" Test User\ userAvatar=\https://example.com/avatar.jpg\ />)
+        render(<FollowButton userId={targetUserId} userName="Test User" userAvatar="https://example.com/avatar.jpg" />)
 
         await waitFor(() => {
             expect(screen.getByText('Takip Et')).toBeInTheDocument()
@@ -118,7 +118,7 @@ describe('FollowButton Component', () => {
         vi.mocked(isFollowing).mockResolvedValue(true)
         vi.mocked(unfollowUser).mockResolvedValue({ success: true })
 
-        render(<FollowButton userId={targetUserId} userName=" Test User\ userAvatar=\https://example.com/avatar.jpg\ />)
+        render(<FollowButton userId={targetUserId} userName="Test User" userAvatar="https://example.com/avatar.jpg" />)
 
         await waitFor(() => {
             expect(screen.getByText('Takiptesin')).toBeInTheDocument()
@@ -141,7 +141,7 @@ describe('FollowButton Component', () => {
             new Promise(resolve => setTimeout(() => resolve({ success: true }), 1000))
         )
 
-        render(<FollowButton userId={targetUserId} userName=" Test User\ userAvatar=\https://example.com/avatar.jpg\ />)
+        render(<FollowButton userId={targetUserId} userName="Test User" userAvatar="https://example.com/avatar.jpg" />)
 
         await waitFor(() => {
             expect(screen.getByText('Takip Et')).toBeInTheDocument()
@@ -165,7 +165,7 @@ describe('FollowButton Component', () => {
 
         const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => { })
 
-        render(<FollowButton userId={targetUserId} userName=" Test User\ userAvatar=\https://example.com/avatar.jpg\ />)
+        render(<FollowButton userId={targetUserId} userName="Test User" userAvatar="https://example.com/avatar.jpg" />)
 
         await waitFor(() => {
             expect(screen.getByText('Takip Et')).toBeInTheDocument()
@@ -198,7 +198,7 @@ describe('FollowButton Component', () => {
             new Promise(resolve => setTimeout(() => resolve(false), 1000))
         )
 
-        render(<FollowButton userId={targetUserId} userName=" Test User\ userAvatar=\https://example.com/avatar.jpg\ />)
+        render(<FollowButton userId={targetUserId} userName="Test User" userAvatar="https://example.com/avatar.jpg" />)
 
         // Should show loading indicator or disabled state
         const button = screen.getByRole('button')
@@ -210,7 +210,7 @@ describe('FollowButton Component', () => {
 
         // Test follow state
         vi.mocked(isFollowing).mockResolvedValue(false)
-        const { rerender } = render(<FollowButton userId={targetUserId} userName=" Test User\ userAvatar=\https://example.com/avatar.jpg\ />)
+        const { rerender } = render(<FollowButton userId={targetUserId} userName="Test User" userAvatar="https://example.com/avatar.jpg" />)
 
         await waitFor(() => {
             const button = screen.getByRole('button')
@@ -219,7 +219,7 @@ describe('FollowButton Component', () => {
 
         // Test unfollow state
         vi.mocked(isFollowing).mockResolvedValue(true)
-        rerender(<FollowButton userId={targetUserId} userName=" Test User\ userAvatar=\https://example.com/avatar.jpg\ />)
+        rerender(<FollowButton userId={targetUserId} userName="Test User" userAvatar="https://example.com/avatar.jpg" />)
 
         await waitFor(() => {
             const button = screen.getByRole('button')
@@ -236,7 +236,7 @@ describe('FollowButton Component', () => {
             new Promise(resolve => setTimeout(() => resolve({ success: true }), 500))
         )
 
-        render(<FollowButton userId={targetUserId} userName=" Test User\ userAvatar=\https://example.com/avatar.jpg\ />)
+        render(<FollowButton userId={targetUserId} userName="Test User" userAvatar="https://example.com/avatar.jpg" />)
 
         await waitFor(() => {
             expect(screen.getByText('Takip Et')).toBeInTheDocument()
@@ -259,7 +259,7 @@ describe('FollowButton Component', () => {
         const { isFollowing } = require('@/lib/followService')
         vi.mocked(isFollowing).mockResolvedValue(false)
 
-        render(<FollowButton userId={targetUserId} userName=" Test User\ userAvatar=\https://example.com/avatar.jpg\ />)
+        render(<FollowButton userId={targetUserId} userName="Test User" userAvatar="https://example.com/avatar.jpg" />)
 
         await waitFor(() => {
             const button = screen.getByRole('button')

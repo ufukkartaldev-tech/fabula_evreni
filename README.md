@@ -295,8 +295,8 @@ Bu proje [MIT](./LICENSE) lisansı altında lisanslanmıştır.
 **Ufuk Kartal**
 
 - 🌐 GitHub: [@ufukkartaldev-tech](https://github.com/ufukkartaldev-tech)
-- 💼 LinkedIn: [Profiliniz](https://linkedin.com/in/...)
-- 📧 Email: your.email@example.com
+- 💼 LinkedIn: (https://www.linkedin.com/in/ufuk-kartal-7908a3286/)
+- 📧 Email: ufuk.kartal.dev@gmail.com
 
 ---
 
@@ -312,13 +312,6 @@ Bu projeyi mümkün kılan harika teknolojilere teşekkürler:
 
 ---
 
-## 📞 İletişim & Destek
-
-### Sorularınız mı var?
-
-- 💬 [GitHub Discussions](https://github.com/ufukkartaldev-tech/fabula_evreni/discussions) - Genel sorular ve tartışmalar
-- 🐛 [GitHub Issues](https://github.com/ufukkartaldev-tech/fabula_evreni/issues) - Bug raporları ve özellik istekleri
-- 📧 Email: your.email@example.com
 
 ### Dokümantasyon
 

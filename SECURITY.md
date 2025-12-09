@@ -97,12 +97,6 @@ Güvenlik açığı bildiren kişiler:
 
 - *Henüz kimse yok - ilk siz olun!*
 
-## 📞 Contact
-
-Güvenlik ile ilgili sorularınız için:
-
-- **Email**: your.email@example.com
-- **GitHub Security**: [Security Advisories](https://github.com/ufukkartaldev-tech/fabula_evreni/security/advisories)
 
 ## 🔗 Resources
 
